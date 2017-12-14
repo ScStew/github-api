@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'octokit'
+require_relative 'git_octo.rb'
 enable :sessions
 
 
@@ -14,15 +15,17 @@ post "/after_login" do
 end
 
 get "/next_page" do
-    u = session[:username]
-    p = session[:pass]
-    client = Octokit::Client.new(:login => u, :password => p)
+    user = session[:username]
+    pass = session[:pass]
+    git_class = Git_api_class.new(user, pass)
+    p git_class.get_api_data("2017-12-07")
+    # client = Octokit::Client.new(:login => u, :password => p)
     # user = client.user
     # p user.path
-    commits = client.commits_since('ScStew/valid_isbn','2016-11-01')
-    commits.each do |x|
-        p x
+    # commits = client.commits_since('ScStew/valid_isbn','2016-11-01')
+    # commits.each do |x|
+    #     p x
         
         
-    end
+    # end
 end

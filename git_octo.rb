@@ -1,7 +1,7 @@
 require 'octokit'
 require 'json'
 
-class Octo
+class Git_api_class
     
     def initialize(username,password)
         @username = username
@@ -28,7 +28,7 @@ class Octo
                 info["#{x.sha}"] = data
             end
         end
-        p info
+        info
     end
 end
 
