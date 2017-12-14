@@ -20,6 +20,7 @@ class Git_api_class
             # p commits.first.sha
             # p commits.first.commit.message
             # p client.user.login
+            #   p client.branches("#{repo.full_name}")
             commits.each do |x|
                 # p x.commit.committer.name
                 if x.commit.author.name == client.user.login || x.commit.committer.name == "GitHub"
