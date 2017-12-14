@@ -1,0 +1,8 @@
+<%data.each do |info|%>
+repo name:   <%=info["repo_name"]%><br>
+author: <%=info["author"]%><br>
+date commit: <%=info["date"]%><br>
+commit message: <%=info["message"]%><br>
+SHA: <%=info["sha"]%><br>
+<br>
+<%end%>
