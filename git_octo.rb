@@ -15,12 +15,14 @@ class Git_api_class
         repos.each do |repo|
             # p repo.full_name
             commits = client.commits_since("#{repo.full_name}",date)
+            # p commits
             # p commits.first
             # p commits.first.sha
             # p commits.first.commit.message
             # p client.user.login
             commits.each do |x|
-                if x.commit.author.name == client.user.login
+                # p x.commit.committer.name
+                if x.commit.author.name == client.user.login || x.commit.committer.name == "GitHub"
                     data = {}
                     data['repo_name'] = repo.name
                     data['author'] = x.commit.author.name
