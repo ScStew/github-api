@@ -21,6 +21,6 @@ get "/next_page" do
     date = session[:date]
     git_class = Git_api_class.new(user, pass)
     data = git_class.get_api_data("#{date}")
-    p data
+    # p data
    erb :next_page, locals: {data:data}
 end
