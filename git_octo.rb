@@ -49,8 +49,6 @@ class Git_api_class
     end
 end
 
-git = Git_api_class.new("scstew",'Beet2ivo7')
-git.get_api_data("2017-12-11")
 
 
 
