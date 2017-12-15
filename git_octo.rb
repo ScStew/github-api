@@ -26,13 +26,9 @@ class Git_api_class
                 # p client.branches("#{repo.full_name}")
                 arr = []
                 commits.each do |x|
-                    # p x.commit.committer.name
                     if x.commit.author.name == client.user.login || x.commit.committer.name == "GitHub"
                         data = {}
-                        # data['repo_name'] = repo.name
                         data['branch'] = branch['name']
-                        # data['author'] = x.commit.author.name
-                        # data['date'] = x.commit.author.date
                         data['message'] = x.commit.message
                         data['sha'] = x.sha
                         # p "#{data} data is here"
@@ -48,12 +44,3 @@ class Git_api_class
      info
     end
 end
-
-git = Git_api_class.new("scstew",'Beet2ivo7')
-git.get_api_data("2017-12-11")
-
-
-
-
-
-
