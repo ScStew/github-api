@@ -1,10 +1,20 @@
 <h1>YOUR INFO SHOULD BE BELOW HERE</h1>
-<%data.each do |info|%>
-Repo Name:   <%=info["repo_name"]%><br>
-Author: <%=info["author"]%><br>
-Branch: <%=info["branch"]%><br>
-Date Commit: <%=info["date"]%><br>
-Commit Message: <%=info["message"]%><br>
-SHA: <%=info["sha"]%><br>
-<br>
+<%data.each do |repo|%>
+    <div style="border-style:solid;border-color:black;margin:auto;width:fit-content;text-align:center;">
+        <h2>Repo Name:<br><%=repo[0]%></h2>
+        <%repo[1].each do |dates|%>
+            <div style="border-style:solid;border-color:black;margin:auto;width:fit-content;">
+                <h3>Date: <%=dates[0]%></h3>
+                <%dates[1].each do |info|%>
+                    <div style="border-style:solid;border-color:black;margin:auto;width:fit-content;">
+                       sha: <%=info["sha"]%><br>
+                       branch: <%=info["branch"]%><br>
+                       message: <%=info["message"]%><br>
+                    </div>
+                <%end%>
+            </div>
+        <%end%>
+    </div>
+    <br>
+    <br>
 <%end%>
