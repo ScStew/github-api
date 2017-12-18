@@ -10,7 +10,8 @@ class Git_api_class
 
     def get_api_data(date)
         client = Octokit::Client.new(:login => @username, :password => @password)
-        p client.user
+        # p client.user
+        # p client.user.email
         repos = client.repositories
         info = {}
         repos.each do |repo|
@@ -25,24 +26,27 @@ class Git_api_class
                 # p commits.first.commit.message
                 # p client.user.login
                 # p client.branches("#{repo.full_name}")
-                arr = []
                 commits.each do |x|
-                    p x
-                    if x.commit.author.name == client.user.login || x.commit.author.name == client.user.name || x.commit.author.email == client.user.email || x.commit.committer.name == "GitHub"
+                    arr = []
+                    # p x.author.login
+                    if x.author.login == client.user.login
+                        # if x.commit.author.name == client.user.login || x.commit.author.name == client.user.name || x.commit.author.email == client.user.email || x.commit.committer.name == "GitHub"
                         data = {}
                         data['branch'] = branch['name']
                         data['message'] = x.commit.message
                         data['sha'] = x.sha
                         # p "#{data} data is here"
                         arr << data
-                    time = x.commit.author.date.to_s.split(" ")[0]
-                    # p time
-                    commit_date["#{time}"] = arr
-                    info["#{repo.name}"] = commit_date
+                        
+                        # p time
+                        time = x.commit.author.date.to_s.split(" ")[0]
+                        commit_date["#{time}"] =+ arr
                     end
                 end
             end
+            info["#{repo.name}"] = commit_date
         end
-     info
+        p info
+        info
     end
 end
