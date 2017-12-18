@@ -31,9 +31,10 @@ class Git_api_class
                 commits.each do |x|
                     # p x.author.login
                     if x.author.login == client.user.login 
-                        new_time= x.commit.author.date
-                        dtime = Time.strptime(new_time.to_s,'%Y-%m-%d %H:%M:%S UTC')
-                       p time =dtime.to_s.split(" ")[0]
+                    p    new_time= x.commit.author.date
+                    p    dtime = Time.strptime(new_time.to_s,'%Y-%m-%d %H:%M:%S UTC').localtime("-05:00")
+                    
+                       p time =dtime.localtime("-05:00").to_s.split(" ")[0]
                         if  commit_date["#{time}"] == nil
                             commit_date["#{time}"] = []
                         end
