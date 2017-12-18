@@ -1,5 +1,6 @@
 require 'octokit'
 require 'json'
+require 'time'
 
 class Git_api_class
     
@@ -30,7 +31,9 @@ class Git_api_class
                 commits.each do |x|
                     # p x.author.login
                     if x.author.login == client.user.login 
-                        time = x.commit.author.date.to_s.split(" ")[0]
+                        new_time= x.commit.author.date
+                        dtime = Time.strptime(new_time.to_s,'%Y-%m-%d %H:%M:%S UTC')
+                       p time =dtime.to_s.split(" ")[0]
                         if  commit_date["#{time}"] == nil
                             commit_date["#{time}"] = []
                         end
@@ -41,9 +44,7 @@ class Git_api_class
                         data['sha'] = x.sha
                         # p "#{data} data is here"
                         commit_date["#{time}"].push(data)
-                        end
-                        # p time
-                    end
+                    end    
                 end
             end
             if commit_date != {}
