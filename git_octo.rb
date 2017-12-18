@@ -41,6 +41,7 @@ class Git_api_class
                         data['sha'] = x.sha
                         # p "#{data} data is here"
                         commit_date["#{time}"].push(data)
+                        end
                         # p time
                     end
                 end
