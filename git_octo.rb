@@ -16,12 +16,12 @@ class Git_api_class
         repos = client.repositories
         info = {}
         repos.each do |repo|
-            # p repo.full_name
+            p repo.full_name
             commit_date = {}
             client.branches("#{repo.full_name}").each do |branch|
                 commits = client.commits_since("#{repo.full_name}" ,date ,branch['name'])
                 # p commits
-                # p branch['name']
+                p branch['name']
                 # p commits.first
                 # p commits.first.sha
                 # p commits.first.commit.message
@@ -30,10 +30,10 @@ class Git_api_class
                 arr = []
                 commits.each do |x|
                     # p x.author.login
-                    if x.author.login == client.user.login 
+                    if x.author.login == client.user.login || x.commit.author.email == client.user.email
                         new_time= x.commit.author.date
-                        dtime = Time.strptime(new_time.to_s,'%Y-%m-%d %H:%M:%S UTC')
-                       p time =dtime.to_s.split(" ")[0]
+                        dtime = new_time.localtime("-05:00")
+                        time = dtime.to_s.split(" ")[0]
                         if  commit_date["#{time}"] == nil
                             commit_date["#{time}"] = []
                         end
@@ -51,7 +51,7 @@ class Git_api_class
                 info["#{repo.name}"] = commit_date
             end
         end
-        p info
+        # p info
         info
     end
 end
