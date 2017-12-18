@@ -46,7 +46,9 @@ class Git_api_class
                     end
                 end
             end
-            info["#{repo.name}"] = commit_date
+            if commit_date != {}
+                info["#{repo.name}"] = commit_date
+            end
         end
         p info
         info
