@@ -26,21 +26,22 @@ class Git_api_class
                 # p commits.first.commit.message
                 # p client.user.login
                 # p client.branches("#{repo.full_name}")
+                arr = []
                 commits.each do |x|
-                    arr = []
                     # p x.author.login
-                    if x.author.login == client.user.login
+                    if x.author.login == client.user.login 
+                        time = x.commit.author.date.to_s.split(" ")[0]
+                        if  commit_date["#{time}"] == nil
+                            commit_date["#{time}"] = []
+                        end
                         # if x.commit.author.name == client.user.login || x.commit.author.name == client.user.name || x.commit.author.email == client.user.email || x.commit.committer.name == "GitHub"
                         data = {}
                         data['branch'] = branch['name']
                         data['message'] = x.commit.message
                         data['sha'] = x.sha
                         # p "#{data} data is here"
-                        arr << data
-                        
+                        commit_date["#{time}"].push(data)
                         # p time
-                        time = x.commit.author.date.to_s.split(" ")[0]
-                        commit_date["#{time}"] =+ arr
                     end
                 end
             end
